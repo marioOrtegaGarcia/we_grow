@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "505304997020",
+    "firebase_url": "https://wegrow-22ed7.firebaseio.com",
+    "project_id": "wegrow-22ed7",
+    "storage_bucket": "wegrow-22ed7.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:505304997020:android:317c86240a894243c8e159",
+        "android_client_info": {
+          "package_name": "com.example.we_grow"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "505304997020-d59rq3gb3rn1binig2qake7diksqti09.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDTzPxk3g8ITwi1ekitWVxNgzmtEhzBGPE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "505304997020-d59rq3gb3rn1binig2qake7diksqti09.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "505304997020-719he5t9mbhgrn1e6eenb6f83b055ps7.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.flutterApp"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
