@@ -4,7 +4,6 @@ class _SignUpMobile extends StatelessWidget {
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
   final verifyPasswordController = TextEditingController();
-  final fullNameController = TextEditingController();
   final SignUpViewModel viewModel;
 
   _SignUpMobile(this.viewModel);
@@ -26,6 +25,7 @@ class _SignUpMobile extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
+                verticalSpaceLarge,
                 Text(
                   'Sign Up',
                   style: TextStyle(
@@ -33,11 +33,7 @@ class _SignUpMobile extends StatelessWidget {
                   ),
                 ),
                 verticalSpaceLarge,
-                InputFieldWidget(
-                  placeholder: 'Full Name',
-                  controller: fullNameController,
-                ),
-                verticalSpaceSmall,
+                verticalSpaceLarge,
                 InputFieldWidget(
                   placeholder: 'Email',
                   controller: emailController,
@@ -57,12 +53,6 @@ class _SignUpMobile extends StatelessWidget {
                   additionalNote:
                       'Password has to be a minimum of 6 characters.',
                 ),
-                verticalSpaceSmall,
-                ExpansionListWidget<String>(
-                  items: ['Admin', 'Farmer', 'Worker'],
-                  title: model.selectedRole,
-                  onItemSelected: model.setSelectedRole,
-                ),
                 verticalSpaceMedium,
                 Row(
                   mainAxisSize: MainAxisSize.max,
@@ -74,8 +64,8 @@ class _SignUpMobile extends StatelessWidget {
                         model.signUp(
                           email: emailController.text,
                           password: passwordController.text,
-                          verify_password: verifyPasswordController.text,
-                          full_name: fullNameController.text,
+                          verifyPassword: verifyPasswordController.text,
+                          // full_name: fullNameController.text,
                         );
                       },
                     )

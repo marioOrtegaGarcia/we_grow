@@ -16,7 +16,7 @@ part 'create_job_post_desktop.dart';
 class CreateJobPostView extends StatelessWidget {
   final titleController = TextEditingController();
   final descriptionController = TextEditingController();
-  final payRateController = TextEditingController();
+  final payRateController = TextEditingController(text: '0');
   final JobPost edittingPost;
 
   CreateJobPostView({
@@ -31,7 +31,8 @@ class CreateJobPostView extends StatelessWidget {
         viewModel: viewModel,
         onModelReady: (viewModel) {
           titleController.text = edittingPost?.title ?? "";
-          payRateController.text = edittingPost?.payRate.toString() ?? "";
+          descriptionController.text = edittingPost?.description ?? "";
+          payRateController.text = edittingPost?.payRate.toString() ?? "0";
           viewModel.setEdittingPost(edittingPost);
         },
         builder: (context, viewModel, child) {

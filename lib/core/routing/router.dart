@@ -8,6 +8,7 @@ import 'package:we_grow/views/login/login_view.dart';
 import 'package:we_grow/views/profile/profile_view.dart';
 import 'package:we_grow/views/search/search_view.dart';
 import 'package:we_grow/views/sign_up/sign_up_view.dart';
+import 'package:we_grow/views/start_up/start_up_view.dart';
 
 Route<dynamic> generateRoute(RouteSettings settings) {
   switch (settings.name) {
@@ -42,10 +43,15 @@ Route<dynamic> generateRoute(RouteSettings settings) {
         routeName: settings.name,
         viewToShow: ProfileView(),
       );
-    case CreateUserInformation:
+    case CreateUserInformationViewRoute:
       return _getPageRoute(
         routeName: settings.name,
         viewToShow: CreateUserInformationView(),
+      );
+    case StartUpViewRoute:
+      return _getPageRoute(
+        routeName: settings.name,
+        viewToShow: StartUpView(),
       );
     default:
       return MaterialPageRoute(

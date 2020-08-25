@@ -52,6 +52,7 @@ class _ProfileMobile extends StatelessWidget {
       ),
       body: Column(
         children: <Widget>[
+          Text(viewModel.getUserFullName()),
           Spacer(flex: 1),
           BottomBarWidget(index: 2),
         ],

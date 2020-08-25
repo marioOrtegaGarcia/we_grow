@@ -19,6 +19,9 @@ class FirestoreService {
     try {
       await _usersCollectionReference.document(user.id).setData(user.toJson());
     } catch (err) {
+      if (err is ArgumentError) {
+        return err.toString();
+      }
       return err.message;
     }
   }
@@ -28,7 +31,10 @@ class FirestoreService {
       var userData = await _usersCollectionReference.document(uid).get();
       return User.fromData(userData.data);
     } catch (err) {
-      return err.message;
+      if (err is PlatformException) {
+        return err.message;
+      }
+      return err.toString();
     }
   }
 

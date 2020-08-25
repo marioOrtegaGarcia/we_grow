@@ -5,6 +5,7 @@ import 'package:we_grow/core/routing/route_names.dart';
 import 'package:we_grow/core/services/authentication_service.dart';
 import 'package:we_grow/core/services/dialog_service.dart';
 import 'package:we_grow/core/services/navigator_service.dart';
+import 'package:we_grow/views/start_up/start_up_view.dart';
 
 class LoginViewModel extends BaseViewModel {
   final AuthenticationService _authenticationService =
@@ -29,7 +30,8 @@ class LoginViewModel extends BaseViewModel {
 
     if (result is bool) {
       if (result) {
-        _navigatorService.navigateTo(HomeViewRoute);
+        // _navigatorService.navigateTo(HomeViewRoute);
+        _navigatorService.navigateTo(StartUpViewRoute);
       } else {
         await _dialogService.showDialog(
           title: "Failed to Login",

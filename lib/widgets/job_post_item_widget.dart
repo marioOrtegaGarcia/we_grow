@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:we_grow/core/locator.dart';
 import 'package:we_grow/core/models/job_post.dart';
+import 'package:we_grow/core/services/authentication_service.dart';
 import 'package:we_grow/theme/shared_styles.dart';
 import 'package:we_grow/theme/ui_helpers.dart';
 
@@ -45,14 +47,15 @@ class JobPostItemWidget extends StatelessWidget {
               ),
             ),
           ),
-          IconButton(
-            icon: Icon(Icons.close),
-            onPressed: () {
-              if (onDeleteItem != null) {
-                onDeleteItem();
-              }
-            },
-          ),
+          if (post.userId == locator<AuthenticationService>().currentUser.id)
+            IconButton(
+              icon: Icon(Icons.close),
+              onPressed: () {
+                if (onDeleteItem != null) {
+                  onDeleteItem();
+                }
+              },
+            ),
         ],
       ),
       decoration: fieldDecoration,

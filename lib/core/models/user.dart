@@ -1,32 +1,39 @@
 class User {
   final String id;
-  final String full_name;
+  final String firstName;
+  final String lastName;
   final String email;
   final String userRole;
   final int preferredDriveDistance;
+  List favoriteCrops = List();
 
   User({
     this.id,
-    this.full_name,
     this.email,
-    this.userRole,
+    this.firstName = "",
+    this.lastName = "",
+    this.userRole = "",
     this.preferredDriveDistance = 0,
   });
 
   User.fromData(Map<String, dynamic> data)
       : id = data['id'],
-        full_name = data['fullName'],
+        firstName = data['firstName'],
+        lastName = data['lastName'],
         email = data['email'],
         userRole = data['userRole'],
-        preferredDriveDistance = data['prefferedDriveDistance'];
+        preferredDriveDistance = data['prefferedDriveDistance'],
+        favoriteCrops = data['favoriteCrops'];
 
   Map<String, dynamic> toJson() {
     return {
       'id': id,
-      'fullName': full_name,
+      'firstName': firstName,
+      'lastName': lastName,
       'email': email,
       'userRole': userRole,
       'preferredDriveDistance': preferredDriveDistance,
+      'favoriteCrops': favoriteCrops,
     };
   }
 }

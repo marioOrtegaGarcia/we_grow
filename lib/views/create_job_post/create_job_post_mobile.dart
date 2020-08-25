@@ -75,6 +75,7 @@ class _CreateJobPostMobile extends StatelessWidget {
               InputFieldWidget(
                 placeholder: "Pay rate/Hour",
                 controller: payRateController,
+                textInputType: TextInputType.number,
               ),
             ],
           ),

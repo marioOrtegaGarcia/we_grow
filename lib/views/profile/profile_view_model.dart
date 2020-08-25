@@ -13,7 +13,9 @@ class ProfileViewModel extends BaseViewModel {
   ProfileViewModel();
 
   String getUserFullName() {
-    return _authenticationService.currentUser.full_name;
+    return _authenticationService.currentUser.firstName +
+        " " +
+        _authenticationService.currentUser.lastName;
   }
 
   void logout() {

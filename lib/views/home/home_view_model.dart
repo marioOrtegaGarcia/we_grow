@@ -62,6 +62,8 @@ class HomeViewModel extends BaseViewModel {
       setBusy(true);
       await _firestoreService.deleteJobPost(_jobPosts[index].documentId);
       setBusy(false);
+      _jobPosts.remove(index);
+      notifyListeners();
     }
   }
 

@@ -11,12 +11,6 @@ class AuthenticationService {
   User _currentUser;
   User get currentUser => _currentUser;
 
-  Future _populateCurrentUser(FirebaseUser user) async {
-    if (user != null) {
-      _currentUser = await _firestoreService.getUser(user.uid);
-    }
-  }
-
   dynamic _isPasswordCompliant(String password, String verifyPassword,
       [int minLength = 6]) {
     if (password == null ||
@@ -77,11 +71,9 @@ class AuthenticationService {
   Future signUpWithEmail({
     @required String email,
     @required String password,
-    @required String verify_password,
-    @required String full_name,
-    @required String role,
+    @required String verifyPassword,
   }) async {
-    var res = _isPasswordCompliant(password, verify_password);
+    var res = _isPasswordCompliant(password, verifyPassword);
     if (res is String) {
       return res;
     }
@@ -95,11 +87,13 @@ class AuthenticationService {
       _currentUser = User(
         id: authResult.user.uid,
         email: email,
-        full_name: full_name,
-        userRole: role,
       );
 
-      await _firestoreService.createUser(_currentUser);
+      try {
+        await _firestoreService.createUser(_currentUser);
+      } catch (err) {
+        return err.message;
+      }
 
       return authResult.user != null;
     } catch (err) {
@@ -120,11 +114,23 @@ class AuthenticationService {
 
   Future<bool> isUserLoggedIn() async {
     var user = await _firebaseAuth.currentUser();
-
-    if (currentUser == null) {
-      _populateCurrentUser(user);
+    await _populateCurrentUser(user);
+    if (user != await _firebaseAuth.currentUser()) {
+      print(
+          "Suss activies,  this seems to be happening when I idle with debug open for too long");
     }
     return user != null;
+  }
+
+  Future _populateCurrentUser(FirebaseUser user) async {
+    if (user != null) {
+      var getUserResult = await _firestoreService.getUser(user.uid);
+      if (getUserResult is String) {
+        print(getUserResult);
+        return getUserResult;
+      }
+      _currentUser = getUserResult;
+    }
   }
 
   Future logOutUser() => _firebaseAuth.signOut();

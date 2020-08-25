@@ -14,35 +14,25 @@ class SignUpViewModel extends BaseViewModel {
   final DialogService _dialogService = locator<DialogService>();
   final NavigatorService _navigatorService = locator<NavigatorService>();
 
-  String _selectedRole = 'Select desired Role.';
-  String get selectedRole => _selectedRole;
-
-  void setSelectedRole(dynamic role) {
-    _selectedRole = role;
-    notifyListeners();
-  }
-
   Future signUp({
     @required String email,
     @required String password,
-    @required String verify_password,
-    @required String full_name,
+    @required String verifyPassword,
+    // @required String full_name,
   }) async {
+    setBusy(true);
+
     var result = await _authenticationService.signUpWithEmail(
       email: email,
       password: password,
-      verify_password: verify_password,
-      full_name: full_name,
-      role: _selectedRole,
+      verifyPassword: verifyPassword,
     );
-
-    setBusy(true);
 
     setBusy(false);
 
     if (result is bool) {
       if (result) {
-        _navigatorService.navigateTo(CreateUserInformation);
+        _navigatorService.navigateTo(CreateUserInformationViewRoute);
       } else {
         await _dialogService.showDialog(
             title: "Failed to Sign Up",
@@ -54,5 +44,3 @@ class SignUpViewModel extends BaseViewModel {
     }
   }
 }
-
-class CreateUserInformationViewRoute {}
