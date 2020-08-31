@@ -1,11 +1,11 @@
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_auth/firebase_auth.dart' as auth;
 import 'package:flutter/foundation.dart';
 import 'package:we_grow/core/locator.dart';
 import 'package:we_grow/core/models/user.dart';
 import 'package:we_grow/core/services/firestore_service.dart';
 
 class AuthenticationService {
-  final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
+  final auth.FirebaseAuth _firebaseAuth = auth.FirebaseAuth.instance;
   final FirestoreService _firestoreService = locator<FirestoreService>();
 
   User _currentUser;
@@ -111,16 +111,16 @@ class AuthenticationService {
   }
 
   Future<bool> isUserLoggedIn() async {
-    var user = await _firebaseAuth.currentUser();
+    var user = await _firebaseAuth.currentUser;
     await _populateCurrentUser(user);
-    if (user != await _firebaseAuth.currentUser()) {
+    if (user != await _firebaseAuth.currentUser) {
       print(
           "Suss activies,  this seems to be happening when I idle with debug open for too long");
     }
     return user != null;
   }
 
-  Future _populateCurrentUser(FirebaseUser user) async {
+  Future _populateCurrentUser(auth.User user) async {
     if (user != null) {
       var getUserResult = await _firestoreService.getUser(user.uid);
       if (getUserResult is String) {

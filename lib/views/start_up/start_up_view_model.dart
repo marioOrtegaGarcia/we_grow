@@ -1,3 +1,4 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:we_grow/core/base/base_view_model.dart';
 import 'package:we_grow/core/locator.dart';
 import 'package:we_grow/core/routing/route_names.dart';
