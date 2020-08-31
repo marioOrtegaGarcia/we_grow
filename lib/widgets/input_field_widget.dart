@@ -21,22 +21,29 @@ class InputFieldWidget extends StatefulWidget {
   final String additionalNote;
   final Function(String) onChanged;
   final TextInputFormatter formatter;
+  final int maxLines;
+  final bool expands;
+  final double fieldHeight;
 
-  InputFieldWidget(
-      {@required this.controller,
-      @required this.placeholder,
-      this.enterPressed,
-      this.fieldFocusNode,
-      this.nextFocusNode,
-      this.additionalNote,
-      this.onChanged,
-      this.formatter,
-      this.validationMessage,
-      this.textInputAction = TextInputAction.next,
-      this.textInputType = TextInputType.text,
-      this.password = false,
-      this.isReadOnly = false,
-      this.smallVersion = false});
+  InputFieldWidget({
+    @required this.controller,
+    @required this.placeholder,
+    this.enterPressed,
+    this.fieldFocusNode,
+    this.nextFocusNode,
+    this.additionalNote,
+    this.onChanged,
+    this.formatter,
+    this.validationMessage,
+    this.textInputAction = TextInputAction.next,
+    this.textInputType = TextInputType.text,
+    this.password = false,
+    this.isReadOnly = false,
+    this.smallVersion = false,
+    this.maxLines = 1,
+    this.expands = false,
+    this.fieldHeight = 55,
+  });
 
   @override
   _InputFieldState createState() => _InputFieldState();
@@ -44,7 +51,7 @@ class InputFieldWidget extends StatefulWidget {
 
 class _InputFieldState extends State<InputFieldWidget> {
   bool isPassword;
-  double fieldHeight = 55;
+  // double fieldHeight = 55;
 
   @override
   void initState() {
@@ -72,6 +79,8 @@ class _InputFieldState extends State<InputFieldWidget> {
                   focusNode: widget.fieldFocusNode,
                   textInputAction: widget.textInputAction,
                   onChanged: widget.onChanged,
+                  maxLines: widget.maxLines,
+                  expands: widget.expands,
                   inputFormatters:
                       widget.formatter != null ? [widget.formatter] : null,
                   onEditingComplete: () {

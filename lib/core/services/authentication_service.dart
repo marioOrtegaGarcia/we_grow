@@ -30,7 +30,7 @@ class AuthenticationService {
     bool hasLowercase = password.contains(new RegExp(r'[a-z]'));
     bool hasSpecialCharacters =
         password.contains(new RegExp(r'[!@#$%^&*(),.?":{}|<>]'));
-    bool hasMinLength = password.length > minLength;
+    bool hasMinLength = password.length >= minLength;
 
     if (hasDigits &
         hasUppercase &
@@ -101,12 +101,10 @@ class AuthenticationService {
     }
   }
 
-  Future updateUser(
-      {String email, String password, String role, String image}) async {
+  Future updateUser({String email, String role, String image}) async {
     var user;
     user = _currentUser;
     if (email != null) user.email = email;
-    if (password != null) user.password = password;
     if (role != null) user.role = role;
 
     _firestoreService.updateUser(user);

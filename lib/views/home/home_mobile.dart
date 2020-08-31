@@ -39,7 +39,7 @@ class _HomeMobile extends StatelessWidget {
         preferredSize: Size(screenWidth(context), 50),
       ),
       body: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 20),
+        padding: EdgeInsets.only(left: 5, right: 5, top: 10),
         child: Column(
           children: [
             Expanded(

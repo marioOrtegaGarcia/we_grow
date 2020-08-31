@@ -49,18 +49,18 @@ class _CreateJobPostMobile extends StatelessWidget {
                 'Create a Job',
                 style: TextStyle(fontSize: 26, fontWeight: FontWeight.bold),
               ),
-              verticalSpaceTiny,
-              Text("Post Image"),
-              verticalSpaceTiny,
-              Container(
-                height: 250,
-                decoration: fieldDecoration,
-                alignment: Alignment.center,
-                child: Text(
-                  "Add Image",
-                  style: TextStyle(color: Colors.grey[400]),
-                ),
-              ),
+              // verticalSpaceTiny,
+              // Text("Post Image"),
+              // verticalSpaceTiny,
+              // Container(
+              //   height: 250,
+              //   decoration: fieldDecoration,
+              //   alignment: Alignment.center,
+              //   child: Text(
+              //     "Add Image",
+              //     style: TextStyle(color: Colors.grey[400]),
+              //   ),
+              // ),
               verticalSpaceMedium,
               InputFieldWidget(
                 placeholder: "Title",
@@ -70,6 +70,8 @@ class _CreateJobPostMobile extends StatelessWidget {
               InputFieldWidget(
                 placeholder: "Description",
                 controller: descriptionController,
+                maxLines: null,
+                textInputType: TextInputType.multiline,
               ),
               verticalSpaceSmall,
               InputFieldWidget(

@@ -1,5 +1,7 @@
 library create_user_information_view;
 
+import 'dart:io';
+
 import 'package:flutter/services.dart';
 import 'package:provider_architecture/provider_architecture.dart';
 import 'package:responsive_builder/responsive_builder.dart';
@@ -18,6 +20,7 @@ class CreateUserInformationView extends StatelessWidget {
   final firstNameController = TextEditingController();
   final lastNameController = TextEditingController();
   final prefferedDriveDistanceController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     CreateUserInformationViewModel viewModel = CreateUserInformationViewModel();

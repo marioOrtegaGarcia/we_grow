@@ -18,8 +18,8 @@ class JobPostItemWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 60,
-      margin: EdgeInsets.only(top: 20),
+      height: 80,
+      margin: EdgeInsets.only(top: 10, left: 5, right: 5),
       child: Row(
         children: <Widget>[
           Expanded(
@@ -29,7 +29,8 @@ class JobPostItemWidget extends StatelessWidget {
                 children: <Widget>[
                   Padding(
                     padding: const EdgeInsets.all(4.0),
-                    child: Image.asset("assets/images/icon_large.png"),
+                    child: Image.asset("assets/images/icon_large.png",
+                        fit: BoxFit.fill),
                   ),
                   horizontalSpaceTiny,
                   Column(
@@ -38,9 +39,27 @@ class JobPostItemWidget extends StatelessWidget {
                     children: <Widget>[
                       Text(
                         post.title,
+                        overflow: TextOverflow.ellipsis,
+                        maxLines: 1,
+                        softWrap: true,
+                        style: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.black,
+                        ),
                       ),
                       if (post.description != null && post.description != "")
-                        Text(post.description != null ? post.description : ""),
+                        Text(
+                          post.description,
+                          overflow: TextOverflow.ellipsis,
+                          maxLines: 2,
+                          softWrap: true,
+                          style: TextStyle(
+                            fontSize: 12,
+                            fontWeight: FontWeight.w400,
+                            color: Colors.black,
+                          ),
+                        ),
                     ],
                   ),
                 ],
@@ -59,26 +78,6 @@ class JobPostItemWidget extends StatelessWidget {
         ],
       ),
       decoration: fieldDecoration,
-      // decoration: BoxDecoration(
-      //     color: Colors.white,
-      //     borderRadius: BorderRadius.circular(5),
-      //     boxShadow: [
-      //       BoxShadow(
-      //         color: Colors.black,
-      //         offset: Offset(2.0, 2.0),
-      //         blurRadius: 5,
-      //       ),
-      //       BoxShadow(
-      //         color: Colors.white,
-      //         offset: Offset(-2.0, -2.0),
-      //         blurRadius: 5,
-      //       ),
-      //       BoxShadow(
-      //         blurRadius: 8,
-      //         color: Colors.grey[200],
-      //         spreadRadius: 3,
-      //       )
-      //     ]),
     );
   }
 }

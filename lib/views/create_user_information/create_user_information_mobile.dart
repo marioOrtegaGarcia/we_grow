@@ -31,14 +31,32 @@ class _CreateUserInformationMobile extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
-                verticalSpaceLarge,
+                verticalSpaceSmall,
                 Text(
-                  'Sign Up',
+                  'One More step',
                   style: TextStyle(
-                    fontSize: 38,
+                    fontSize: 30,
                   ),
                 ),
-                verticalSpaceLarge,
+                Text(
+                  'Personal Information',
+                  style: TextStyle(
+                    fontSize: 20,
+                  ),
+                ),
+                verticalSpaceSmall,
+                FlatButton.icon(
+                  color: Colors.blue,
+                  shape: CircleBorder(),
+                  icon: Icon(Icons.add_a_photo, size: 60),
+                  splashColor: Colors.green,
+                  label: Text(""),
+                  padding: EdgeInsets.all(35),
+                  onPressed: () {
+                    model.openGallery();
+                  },
+                ),
+                verticalSpaceMedium,
                 InputFieldWidget(
                   placeholder: 'First Name',
                   controller: firstNameController,
@@ -48,7 +66,7 @@ class _CreateUserInformationMobile extends StatelessWidget {
                   placeholder: 'Last Name',
                   controller: lastNameController,
                 ),
-                verticalSpaceMedium,
+                verticalSpaceSmall,
                 InputFieldWidget(
                   placeholder: 'Preffered Drive Distance',
                   controller: prefferedDriveDistanceController,

@@ -27,22 +27,34 @@ class _SignUpMobile extends StatelessWidget {
               children: <Widget>[
                 verticalSpaceLarge,
                 Text(
-                  'Sign Up',
+                  "WeGrow",
                   style: TextStyle(
-                    fontSize: 38,
+                    color: Colors.blue,
+                    fontWeight: FontWeight.w700,
+                    fontStyle: FontStyle.italic,
+                    fontFamily: "Proxima Nova",
+                    fontSize: 60,
                   ),
                 ),
-                verticalSpaceLarge,
-                verticalSpaceLarge,
+                verticalSpaceSmall,
+                Text(
+                  'Sign Up',
+                  style: TextStyle(
+                    fontSize: 24,
+                  ),
+                ),
+                verticalSpaceMedium,
                 InputFieldWidget(
                   placeholder: 'Email',
                   controller: emailController,
+                  textInputType: TextInputType.emailAddress,
                 ),
                 verticalSpaceSmall,
                 InputFieldWidget(
                   placeholder: 'Password',
                   password: true,
                   controller: passwordController,
+                  textInputType: TextInputType.visiblePassword,
                   additionalNote:
                       'Password has to be a minimum of 6 characters.',
                 ),
@@ -50,25 +62,51 @@ class _SignUpMobile extends StatelessWidget {
                   placeholder: ' Verify Password',
                   password: true,
                   controller: verifyPasswordController,
-                  additionalNote:
-                      'Password has to be a minimum of 6 characters.',
+                  textInputType: TextInputType.visiblePassword,
+                  additionalNote: 'Verify your password.',
                 ),
                 verticalSpaceMedium,
                 Row(
                   mainAxisSize: MainAxisSize.max,
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    BusyButtonWidget(
-                      title: 'Sign Up',
-                      onPressed: () {
+                    RaisedButton(
+                      padding: EdgeInsets.fromLTRB(80, 15, 80, 15),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(30),
+                        // side: BorderSide(
+                        //   color: Colors.grey[300],
+                        //   width: 2,
+                        // ),
+                      ),
+                      onPressed: () => {
                         model.signUp(
                           email: emailController.text,
                           password: passwordController.text,
                           verifyPassword: verifyPasswordController.text,
-                          // full_name: fullNameController.text,
-                        );
+                        )
                       },
-                    )
+                      color: Colors.blue,
+                      textColor: Colors.black,
+                      child: Text(
+                        "SignUp",
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 14,
+                        ),
+                      ),
+                    ),
+                    // BusyButtonWidget(
+                    //   title: 'Sign Up',
+                    //   onPressed: () {
+                    //     model.signUp(
+                    //       email: emailController.text,
+                    //       password: passwordController.text,
+                    //       verifyPassword: verifyPasswordController.text,
+                    //       // full_name: fullNameController.text,
+                    //     );
+                    //   },
+                    // )
                   ],
                 )
               ],

@@ -1,3 +1,4 @@
+import 'package:we_grow/core/services/camera_service.dart';
 import 'package:we_grow/core/services/dialog_service.dart';
 import 'package:we_grow/core/services/firestore_service.dart';
 
@@ -19,5 +20,6 @@ class LocatorInjector {
     locator.registerLazySingleton(() => DialogService());
     locator.registerLazySingleton(() => AuthenticationService());
     locator.registerLazySingleton(() => FirestoreService());
+    locator.registerLazySingleton(() => CameraService());
   }
 }
