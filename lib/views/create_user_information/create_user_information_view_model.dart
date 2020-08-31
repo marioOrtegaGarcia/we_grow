@@ -1,7 +1,6 @@
 import 'dart:io';
 
 import 'package:flutter/foundation.dart';
-import 'package:image_picker/image_picker.dart';
 import 'package:we_grow/core/base/base_view_model.dart';
 import 'package:we_grow/core/locator.dart';
 import 'package:we_grow/core/models/user.dart';
@@ -48,7 +47,7 @@ class CreateUserInformationViewModel extends BaseViewModel {
     @required String lastName,
     @required String prefferedDriveDistance,
   }) async {
-    var user = await _authenticationService.currentUser.toJson();
+    var user = _authenticationService.currentUser.toJson();
     user['firstName'] = firstName;
     user['lastName'] = lastName;
     user['prefferedDriveDistance'] = int.parse(prefferedDriveDistance);

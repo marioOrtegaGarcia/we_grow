@@ -1,4 +1,3 @@
-import 'package:firebase_core/firebase_core.dart';
 import 'package:we_grow/core/base/base_view_model.dart';
 import 'package:we_grow/core/locator.dart';
 import 'package:we_grow/core/routing/route_names.dart';
@@ -12,7 +11,7 @@ class StartUpViewModel extends BaseViewModel {
 
   Future handleStartupLogic() async {
     var userHasLoggedIn = await _authenticationService.isUserLoggedIn();
-    var user = await _authenticationService.currentUser;
+    var user = _authenticationService.currentUser;
 
     if (user == null) userHasLoggedIn = false;
 

@@ -7,15 +7,15 @@ import 'package:we_grow/core/models/user.dart';
 
 class FirestoreService {
   final CollectionReference _usersCollectionReference =
-      FirebaseFirestore.instance.collection("users");
+      Firestore.instance.collection("users");
   final CollectionReference _jobPostsCollectionReference =
-      FirebaseFirestore.instance.collection("job_posts");
+      Firestore.instance.collection("job_posts");
   final StreamController<List<JobPost>> _jobPostsController =
       StreamController<List<JobPost>>.broadcast();
 
   Future createUser(User user) async {
     try {
-      await _usersCollectionReference.doc(user.id).set(user.toJson());
+      await _usersCollectionReference.document(user.id).setData(user.toJson());
     } catch (err) {
       if (err is ArgumentError) {
         return err.toString();
@@ -26,8 +26,8 @@ class FirestoreService {
 
   Future getUser(String uid) async {
     try {
-      var userData = await _usersCollectionReference.doc(uid).get();
-      return User.fromData(userData.data());
+      var userData = await _usersCollectionReference.document(uid).get();
+      return User.fromData(userData.data);
     } catch (err) {
       if (err is PlatformException) {
         return err.message;
@@ -38,7 +38,9 @@ class FirestoreService {
 
   Future updateUser(User user) async {
     try {
-      await _usersCollectionReference.doc(user.id).update(user.toJson());
+      await _usersCollectionReference
+          .document(user.id)
+          .updateData(user.toJson());
     } catch (err) {
       return err.message;
     }
@@ -56,8 +58,8 @@ class FirestoreService {
   Future updateJobPost(JobPost post) async {
     try {
       await _jobPostsCollectionReference
-          .doc(post.documentId)
-          .update(post.toMap());
+          .document(post.documentId)
+          .updateData(post.toMap());
       return true;
     } catch (err) {
       if (err is PlatformException) {
@@ -69,15 +71,15 @@ class FirestoreService {
   }
 
   Future deleteJobPost(String documentID) async {
-    await _jobPostsCollectionReference.doc(documentID).delete();
+    await _jobPostsCollectionReference.document(documentID).delete();
   }
 
   Future getJobPostsOnce() async {
     try {
-      var jobPosts = await _jobPostsCollectionReference.get();
-      if (jobPosts.docs.isNotEmpty) {
-        return jobPosts.docs
-            .map((job) => JobPost.fromMap(job.data(), job.id))
+      var jobPosts = await _jobPostsCollectionReference.getDocuments();
+      if (jobPosts.documents.isNotEmpty) {
+        return jobPosts.documents
+            .map((job) => JobPost.fromMap(job.data, job.documentID))
             .where((mapppedItem) => mapppedItem.title != null)
             .toList();
       }
@@ -91,9 +93,10 @@ class FirestoreService {
 
   Stream listenToPostsRealTime() {
     _jobPostsCollectionReference.snapshots().listen((jobPostSnapshot) {
-      if (jobPostSnapshot.docs.isNotEmpty) {
-        var posts = jobPostSnapshot.docs
-            .map((snapshot) => JobPost.fromMap(snapshot.data(), snapshot.id))
+      if (jobPostSnapshot.documents.isNotEmpty) {
+        var posts = jobPostSnapshot.documents
+            .map((snapshot) =>
+                JobPost.fromMap(snapshot.data, snapshot.documentID))
             .where((mappedIted) => mappedIted.title != null)
             .toList();
 

@@ -1,7 +1,4 @@
-import 'package:firebase_core/firebase_core.dart';
 import 'package:we_grow/core/services/dialog_service.dart';
-import 'package:we_grow/views/login/login_view.dart';
-import 'package:we_grow/views/sign_up/sign_up_view.dart';
 import 'package:we_grow/views/start_up/start_up_view.dart';
 
 import 'core/locator.dart';

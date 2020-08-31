@@ -1,7 +1,5 @@
 library create_user_information_view;
 
-import 'dart:io';
-
 import 'package:flutter/services.dart';
 import 'package:provider_architecture/provider_architecture.dart';
 import 'package:responsive_builder/responsive_builder.dart';

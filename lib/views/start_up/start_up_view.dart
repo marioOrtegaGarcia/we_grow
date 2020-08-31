@@ -1,6 +1,5 @@
 library start_up_view;
 
-import 'package:firebase_core/firebase_core.dart';
 import 'package:provider_architecture/provider_architecture.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 import 'package:flutter/material.dart';
@@ -13,7 +12,6 @@ part 'start_up_desktop.dart';
 class StartUpView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    Firebase.initializeApp();
     StartUpViewModel viewModel = StartUpViewModel();
     return ViewModelProvider<StartUpViewModel>.withConsumer(
         viewModel: viewModel,

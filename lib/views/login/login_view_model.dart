@@ -5,7 +5,6 @@ import 'package:we_grow/core/routing/route_names.dart';
 import 'package:we_grow/core/services/authentication_service.dart';
 import 'package:we_grow/core/services/dialog_service.dart';
 import 'package:we_grow/core/services/navigator_service.dart';
-import 'package:we_grow/views/start_up/start_up_view.dart';
 
 class LoginViewModel extends BaseViewModel {
   final AuthenticationService _authenticationService =
@@ -13,7 +12,7 @@ class LoginViewModel extends BaseViewModel {
   final DialogService _dialogService = locator<DialogService>();
   final NavigatorService _navigatorService = locator<NavigatorService>();
 
-  Future gotoSignUpView() {
+  Future gotoSignUpView() async {
     _navigatorService.navigateTo(SignUpViewRoute);
   }
 

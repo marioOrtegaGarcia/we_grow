@@ -4,7 +4,6 @@ import 'package:provider_architecture/provider_architecture.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 import 'package:flutter/material.dart';
 import 'package:we_grow/core/models/job_post.dart';
-import 'package:we_grow/theme/shared_styles.dart';
 import 'package:we_grow/theme/ui_helpers.dart';
 import 'package:we_grow/widgets/input_field_widget.dart';
 import 'create_job_post_view_model.dart';
