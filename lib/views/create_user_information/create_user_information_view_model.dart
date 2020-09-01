@@ -1,12 +1,13 @@
 import 'dart:io';
-
+import 'dart:async';
 import 'package:flutter/foundation.dart';
+import 'package:image_cropper/image_cropper.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:we_grow/core/base/base_view_model.dart';
 import 'package:we_grow/core/locator.dart';
 import 'package:we_grow/core/models/user.dart';
 import 'package:we_grow/core/routing/route_names.dart';
 import 'package:we_grow/core/services/authentication_service.dart';
-import 'package:we_grow/core/services/camera_service.dart';
 import 'package:we_grow/core/services/firestore_service.dart';
 import 'package:we_grow/core/services/navigator_service.dart';
 
@@ -14,27 +15,41 @@ class CreateUserInformationViewModel extends BaseViewModel {
   final _authenticationService = locator<AuthenticationService>();
   final _firestoreService = locator<FirestoreService>();
   final _navigatorService = locator<NavigatorService>();
-  final _cameraService = locator<CameraService>();
 
   String _selectedRole = 'Select desired Role.';
   String get selectedRole => _selectedRole;
 
   File _image;
 
-  get image => _image;
+  File get image => _image;
 
-  void openCamera() async {
-    var image = _cameraService.getImageFromCamera();
-    if (image != null) {
-      _image = image as File;
-    }
+  void removeImage() {
+    print("Clear image");
+    _image = null;
+    notifyListeners();
   }
 
-  void openGallery() async {
-    var image = _cameraService.getImageFromGallery();
+  void getImageFromUser(ImageSource source) async {
+    var image = await ImagePicker.pickImage(source: source);
     if (image != null) {
-      _image = image as File;
+      _image = image;
+      // TODO: Find a way to get crop image working, Learn how AndroidManifest.xml works
+      // _cropImage();
+    } else {
+      log.e("Error trying to get image");
     }
+    notifyListeners();
+  }
+
+  Future<void> _cropImage() async {
+    File croppedImage = await ImageCropper.cropImage(
+      sourcePath: _image.path,
+      maxWidth: 512,
+      maxHeight: 512,
+      aspectRatio: CropAspectRatio(ratioX: 1.0, ratioY: 1.0),
+    );
+
+    _image = croppedImage ?? _image;
   }
 
   void setSelectedRole(dynamic role) {
