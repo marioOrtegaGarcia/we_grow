@@ -1,4 +1,5 @@
 import 'package:we_grow/core/services/dialog_service.dart';
+import 'package:we_grow/core/services/firebase_storage.dart';
 import 'package:we_grow/core/services/firestore_service.dart';
 
 import '../core/logger.dart';
@@ -19,5 +20,6 @@ class LocatorInjector {
     locator.registerLazySingleton(() => DialogService());
     locator.registerLazySingleton(() => AuthenticationService());
     locator.registerLazySingleton(() => FirestoreService());
+    locator.registerLazySingleton(() => FirebaseStorageService());
   }
 }

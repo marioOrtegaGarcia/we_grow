@@ -17,6 +17,10 @@ class ProfileViewModel extends BaseViewModel {
         _authenticationService.currentUser.lastName;
   }
 
+  String getProfileImageUrl() {
+    return _authenticationService.currentUser.profilePictureUrl;
+  }
+
   void logout() {
     this._authenticationService.logOutUser();
     _navigatorService.navigateTo(LoginViewRoute);

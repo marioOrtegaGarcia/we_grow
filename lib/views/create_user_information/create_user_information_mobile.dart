@@ -69,42 +69,41 @@ class _CreateUserInformationMobile extends StatelessWidget {
                               padding: EdgeInsets.all(35),
                               onPressed: () {
                                 showDialog<void>(
-                                    context: context,
-                                    barrierDismissible: false,
-                                    builder: (BuildContext context) {
-                                      return AlertDialog(
-                                        title: Text("Upload Image"),
-                                        content:
-                                            Text("Select where to upload from"),
-                                        actions: [
-                                          FlatButton(
-                                            child: Text("Camera"),
-                                            onPressed: () {
-                                              model.getImageFromUser(
-                                                  ImageSource.camera);
-                                              Navigator.of(context).pop();
-                                            },
-                                          ),
-                                          FlatButton(
-                                            child: Text("Gallery"),
-                                            onPressed: () {
-                                              model.getImageFromUser(
-                                                  ImageSource.gallery);
-                                              Navigator.of(context).pop();
-                                            },
-                                          ),
-                                          FlatButton(
-                                            child: Text("Cancel"),
-                                            onPressed: () {
-                                              Navigator.of(context).pop();
-                                            },
-                                          ),
-                                        ],
-                                        elevation: 24,
-                                      );
-                                    });
-                                // model.openCamera();
-                                // model.openGallery();
+                                  context: context,
+                                  barrierDismissible: false,
+                                  builder: (BuildContext context) {
+                                    return AlertDialog(
+                                      title: Text("Upload Image"),
+                                      content:
+                                          Text("Select where to upload from"),
+                                      actions: [
+                                        FlatButton(
+                                          child: Text("Camera"),
+                                          onPressed: () {
+                                            model.getImageFromUser(
+                                                ImageSource.camera);
+                                            Navigator.of(context).pop();
+                                          },
+                                        ),
+                                        FlatButton(
+                                          child: Text("Gallery"),
+                                          onPressed: () {
+                                            model.getImageFromUser(
+                                                ImageSource.gallery);
+                                            Navigator.of(context).pop();
+                                          },
+                                        ),
+                                        FlatButton(
+                                          child: Text("Cancel"),
+                                          onPressed: () {
+                                            Navigator.of(context).pop();
+                                          },
+                                        ),
+                                      ],
+                                      elevation: 24,
+                                    );
+                                  },
+                                );
                               },
                             ),
                     ),

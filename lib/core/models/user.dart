@@ -1,3 +1,5 @@
+import 'dart:io';
+
 class User {
   final String id;
   final String firstName;
@@ -5,6 +7,7 @@ class User {
   final String email;
   final String userRole;
   final int preferredDriveDistance;
+  final String profilePictureUrl;
   List favoriteCrops = List();
 
   User({
@@ -14,6 +17,7 @@ class User {
     this.lastName = "",
     this.userRole = "",
     this.preferredDriveDistance = 0,
+    this.profilePictureUrl,
   });
 
   User.fromData(Map<String, dynamic> data)
@@ -23,6 +27,7 @@ class User {
         email = data['email'],
         userRole = data['userRole'],
         preferredDriveDistance = data['prefferedDriveDistance'],
+        profilePictureUrl = data['profilePictureUrl'] ?? "",
         favoriteCrops = data['favoriteCrops'];
 
   Map<String, dynamic> toJson() {
@@ -34,6 +39,7 @@ class User {
       'userRole': userRole,
       'preferredDriveDistance': preferredDriveDistance,
       'favoriteCrops': favoriteCrops,
+      'profilePictureUrl': profilePictureUrl,
     };
   }
 }

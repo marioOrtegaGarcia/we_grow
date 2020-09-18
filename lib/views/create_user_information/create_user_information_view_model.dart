@@ -8,6 +8,7 @@ import 'package:we_grow/core/locator.dart';
 import 'package:we_grow/core/models/user.dart';
 import 'package:we_grow/core/routing/route_names.dart';
 import 'package:we_grow/core/services/authentication_service.dart';
+import 'package:we_grow/core/services/firebase_storage.dart';
 import 'package:we_grow/core/services/firestore_service.dart';
 import 'package:we_grow/core/services/navigator_service.dart';
 
@@ -15,17 +16,20 @@ class CreateUserInformationViewModel extends BaseViewModel {
   final _authenticationService = locator<AuthenticationService>();
   final _firestoreService = locator<FirestoreService>();
   final _navigatorService = locator<NavigatorService>();
+  final _firebaseStorageService = locator<FirebaseStorageService>();
 
   String _selectedRole = 'Select desired Role.';
   String get selectedRole => _selectedRole;
 
   File _image;
+  String _imageUrl = "";
 
   File get image => _image;
 
   void removeImage() {
     print("Clear image");
     _image = null;
+    _imageUrl = "";
     notifyListeners();
   }
 
@@ -33,8 +37,7 @@ class CreateUserInformationViewModel extends BaseViewModel {
     var image = await ImagePicker.pickImage(source: source);
     if (image != null) {
       _image = image;
-      // TODO: Find a way to get crop image working, Learn how AndroidManifest.xml works
-      // _cropImage();
+      _cropImage();
     } else {
       log.e("Error trying to get image");
     }
@@ -50,6 +53,7 @@ class CreateUserInformationViewModel extends BaseViewModel {
     );
 
     _image = croppedImage ?? _image;
+    notifyListeners();
   }
 
   void setSelectedRole(dynamic role) {
@@ -69,6 +73,8 @@ class CreateUserInformationViewModel extends BaseViewModel {
     if (!_selectedRole.contains("Select")) {
       user['userRole'] = _selectedRole;
     }
+    user['profilePictureUrl'] =
+        await _firebaseStorageService.uploadImage("profilePicture/", _image);
     var result = await _firestoreService.updateUser(User.fromData(user));
 
     if (result is String) {

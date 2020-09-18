@@ -27,11 +27,21 @@ class _ProfileMobile extends StatelessWidget {
                       textAlign: TextAlign.center,
                     ),
                     Spacer(),
-                    BusyButtonWidget(
-                      title: 'Log Out',
-                      onPressed: () {
-                        viewModel.logout();
-                      },
+                    RaisedButton(
+                      padding: EdgeInsets.fromLTRB(15, 15, 15, 15),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(30),
+                      ),
+                      onPressed: () => {viewModel.logout()},
+                      color: Colors.blue,
+                      textColor: Colors.black,
+                      child: Text(
+                        "Log Out",
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 14,
+                        ),
+                      ),
                     ),
                   ],
                 ),
@@ -52,11 +62,43 @@ class _ProfileMobile extends StatelessWidget {
       ),
       body: Column(
         children: <Widget>[
-          Text(viewModel.getUserFullName()),
+          Row(
+            children: <Widget>[
+              Column(
+                children: [
+                  // CachedNetworkImage(
+                  //   imageUrl: viewModel.getProfileImageUrl(),
+                  //   progressIndicatorBuilder:
+                  //       (context, url, downloadProgress) =>
+                  //           CircularProgressIndicator(
+                  //               value: downloadProgress.progress),
+                  //   errorWidget: (context, url, error) => Icon(Icons.error),
+                  // ),
+                  CircleAvatar(
+                    backgroundImage: _getUserImage(),
+                  ),
+                ],
+              ),
+              horizontalSpaceTiny,
+              Text(viewModel.getUserFullName()),
+            ],
+          ),
+          Spacer(flex: 1),
+          Text(viewModel.getProfileImageUrl() ?? "No Image found"),
           Spacer(flex: 1),
           BottomBarWidget(index: 2),
         ],
       ),
     );
+  }
+
+  dynamic _getUserImage() {
+    try {
+      return Image.network(
+        viewModel.getProfileImageUrl(),
+      );
+    } catch (err) {
+      return Icon(Icons.person_outline);
+    }
   }
 }
